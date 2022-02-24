@@ -30,6 +30,7 @@ im = im -x_t(i) * sin(n * dw * i * dt) * dt
 enddo
 
 write(4,*) n * dw, sqrt(re ** 2 + re ** 2)
+print*, sqrt(re ** 2 + re ** 2)
 print*, "step", 100 * n/nmax, "%"
 enddo
 
