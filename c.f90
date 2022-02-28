@@ -6,11 +6,10 @@ parameter(imax=int(tmax/dt),nmax=int(wmax/dw),om1=sqrt(om0**2-2*gam**2))
 real xt(imax)
 open(1,file='xt')
 open(2,file='xw')
-open(3,file='dw')
-x=0.5;v=0.
+x=1.;v=0.
 do i=1,imax
 xt(i)=x
-dx=v;dv=-om0**2*x-2*gam*v+cos(om1 * t)!+cos(om2 * t)
+dx=v;dv=-om0**2*x-2*gam*v+cos(om1 * t)
 write(1,*) i*dt, x
 x=x+dx*dt;v=v+dv*dt
 enddo
@@ -21,6 +20,5 @@ re=re+xt(i)*cos(n*dw*i*dt)
 im=im-xt(i)*sin(n*dw*i*dt)
 enddo
 write(2,*) n*dw, sqrt(re**2+im**2)
-write(3,*) n*dw, a*((om0**2 - om1**2)**2 + 4*(n*dw)**2 * gam**2)**(-1/2)
 enddo
 end
