@@ -7,6 +7,7 @@ real xt(imax)
 
 open(1,file='xt')
 open(2,file='xw')
+<<<<<<< HEAD
 open(3,file='xv')
 
 x=1.;v=0. ! initial condition
@@ -17,6 +18,12 @@ write(3,*) x, v
 xt(i)=x
 
 dx=v;dv=-om0**2*x-2*gam*v+a0*cos(om1*i*dt)
+=======
+x=1.;v=0.
+do i=1,imax
+xt(i)=x
+dx=v;dv=-om0**2*x-2*gam*v+cos(om1 * t)
+>>>>>>> cab02d59779c8261e13660300d7cb169135904b0
 write(1,*) i*dt, x
 x=x+dx*dt;v=v+dv*dt
 enddo
