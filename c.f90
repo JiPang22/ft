@@ -1,26 +1,32 @@
-program b
-real*8 x,v,dt,dx,dv,dw,om0,gam,re,im,tmax,wmax,om1,a
-parameter(dt=1.e-3,dw=1.e-2,tmax=40.,wmax=20.,gam=0.1,om0=1.,a=1.)
+program c 
+real*8 x,v,dt,dx,dv,dw,gam,re,im,tmax,wmax,om0,om1,a0
+parameter(dt=1.e-4,dw=1.e-2,tmax=20.,wmax=20.,gam=0.5)
 integer*8 i,n,imax,nmax
-parameter(imax=int(tmax/dt),nmax=int(wmax/dw),om1=sqrt(om0**2-2*gam**2))
+parameter(imax=int(tmax/dt),nmax=int(wmax/dw),om0=0.5,om1=0.5)
 real xt(imax)
+
 open(1,file='xt')
 open(2,file='xw')
-open(3,file='dw')
-x=0.5;v=0.
-do i=1,imax
+open(3,file='xv')
+
+x=1.;v=0. ! initial condition
+
+do i=1,imax ! "i" is time index
+write(1,*) i*dt, x
+write(3,*) x, v
 xt(i)=x
-dx=v;dv=-om0**2*x-2*gam*v+cos(om1 * t)!+cos(om2 * t)
+
+dx=v;dv=-om0**2*x-2*gam*v+a0*cos(om1*i*dt)
 write(1,*) i*dt, x
 x=x+dx*dt;v=v+dv*dt
 enddo
-do n=1,nmax
+
+do n=1,nmax ! "n" is omega index
 re=0.;im=0.
 do i=1,imax
 re=re+xt(i)*cos(n*dw*i*dt)
 im=im-xt(i)*sin(n*dw*i*dt)
 enddo
 write(2,*) n*dw, sqrt(re**2+im**2)
-write(3,*) n*dw, a*((om0**2 - om1**2)**2 + 4*(n*dw)**2 * gam**2)**(-1/2)
 enddo
 end
