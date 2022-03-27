@@ -6,8 +6,6 @@ parameter(dt=1.e-2,dw=1.e-2,tmax=20.,wmax=20.)
 parameter(imax=int(tmax/dt),jmax=int(wmax/dw))
 real xt(imax), gama(3)
 
-!system parameter
-!parameter(gam=1.,a=1.,om0=10.,om1=0.) !standard gam=1 a=1 om0=10 om1=5
 parameter(a=1.,om0=10.,om1=0.) !standard gam=1 a=1 om0=10 om1=5
 
 
